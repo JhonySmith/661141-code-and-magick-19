@@ -8,8 +8,6 @@ var SHADOWS = 10;
 var GIST_WIDTH = 40;
 var GIST_MAX_HEIGHT = 150;
 var gridStepX = 50;
-var gridColors = ['red', 'green', 'yellow', 'orange'];
-
 
 var renderLeaderboard = function (ctx, x, y, color) {
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -55,5 +53,5 @@ window.renderStatistics = function (ctx, players, times) {
     ctx.fillRect(LEADERBOARD_POS_X + gridStepX + (gridStepX + GIST_WIDTH) * i, LEADERBOARD_POS_Y + 90 + GIST_MAX_HEIGHT * (1 - maxGist), GIST_WIDTH, GIST_MAX_HEIGHT * maxGist);
     ctx.fillStyle = 'black';
     ctx.fillText(players[i], LEADERBOARD_POS_X + gridStepX + (gridStepX + GIST_WIDTH) * i, LEADERBOARD_POS_Y + 90 + GIST_MAX_HEIGHT + 15);
-  };
+  }
 };
