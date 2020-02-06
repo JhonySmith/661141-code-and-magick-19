@@ -41,16 +41,22 @@ setupBlock.classList.remove('hidden');
 
 var listElement = setupBlock.querySelector('.setup-similar-list');
 
-var wizardTemplate = document
-  .querySelector('#similar-wizard-template')
-  .content.querySelector('.setup-similar-item');
-
-var fragment = document.createDocumentFragment();
-
 var arrayRandElement = function (arr) {
   var rand = Math.floor(Math.random() * arr.length);
   return arr[rand];
 };
+
+for (var i = 0; i < 4; i++) {
+  wizards[i] = {
+    name: arrayRandElement(names) + ' ' + arrayRandElement(secondNames),
+    coatColor: arrayRandElement(coatColors),
+    eyesColor: arrayRandElement(eyesColors)
+  };
+}
+
+var wizardTemplate = document
+  .querySelector('#similar-wizard-template')
+  .content.querySelector('.setup-similar-item');
 
 var renderWizard = function (wizard) {
   var wizardElement = wizardTemplate.cloneNode(true);
@@ -62,15 +68,9 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-for (var i = 0; i < 4; i++) {
-  wizards[i] = {
-    name: arrayRandElement(names) + ' ' + arrayRandElement(secondNames),
-    coatColor: arrayRandElement(coatColors),
-    eyesColor: arrayRandElement(eyesColors)
-  };
-}
+var fragment = document.createDocumentFragment();
 
-for (var j = 0; i < wizards.length; j++) {
+for (var j = 0; j < wizards.length; j++) {
   fragment.appendChild(renderWizard(wizards[j]));
 }
 
