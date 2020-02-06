@@ -70,8 +70,8 @@ for (var i = 0; i < 4; i++) {
   };
 }
 
-for (var i = 0; i < wizards.length; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
+for (var j = 0; i < wizards.length; j++) {
+  fragment.appendChild(renderWizard(wizards[j]));
 }
 
 listElement.appendChild(fragment);
