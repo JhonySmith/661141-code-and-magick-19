@@ -1,9 +1,9 @@
 'use strict';
 
+// Массивы данных
 var names = [
   'Иван',
-  'Хуан',
-  'Себастьян',
+  'Хуан Себастьян',
   'Мария',
   'Кристоф',
   'Виктор',
@@ -34,46 +34,64 @@ var coatColors = [
 
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
 
+// Необходимые переменные
 var wizards = [];
 
 var setupBlock = document.querySelector('.setup');
-setupBlock.classList.remove('hidden');
 
 var listElement = setupBlock.querySelector('.setup-similar-list');
-
-var arrayRandElement = function (arr) {
-  var rand = Math.floor(Math.random() * arr.length);
-  return arr[rand];
-};
-
-for (var i = 0; i < 4; i++) {
-  wizards[i] = {
-    name: arrayRandElement(names) + ' ' + arrayRandElement(secondNames),
-    coatColor: arrayRandElement(coatColors),
-    eyesColor: arrayRandElement(eyesColors)
-  };
-}
 
 var wizardTemplate = document
   .querySelector('#similar-wizard-template')
   .content.querySelector('.setup-similar-item');
 
-var renderWizard = function (wizard) {
-  var wizardElement = wizardTemplate.cloneNode(true);
+// Константы
+var WIZARDS_COUNT = 4;
 
-  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+// Функции
 
-  return wizardElement;
+// функция получения случайного элемента массива
+var arrayRandElement = function (arr) {
+  var rand = Math.floor(Math.random() * arr.length);
+  return arr[rand];
 };
 
-var fragment = document.createDocumentFragment();
+// функция создания массива магов
+var makeWizardsArr = function (clearArr, wizardsNumber) {
+  for (var i = 0; i < wizardsNumber; i++) {
+    clearArr[i] = {
+      name: arrayRandElement(names) + ' ' + arrayRandElement(secondNames),
+      coatColor: arrayRandElement(coatColors),
+      eyesColor: arrayRandElement(eyesColors)
+    };
+  }
 
-for (var j = 0; j < wizards.length; j++) {
-  fragment.appendChild(renderWizard(wizards[j]));
-}
+  return clearArr;
+};
 
-listElement.appendChild(fragment);
+// функция отрисовки массива магов на странице
+var makeWizardsElements = function (wizardsArr) {
 
+  var fragment = document.createDocumentFragment();
+
+  for (var i = 0; i < wizardsArr.length; i++) {
+    var wizardElement = wizardTemplate.cloneNode(true);
+
+    wizardElement.querySelector('.setup-similar-label').textContent = wizardsArr[i].name;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizardsArr[i].coatColor;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizardsArr[i].eyesColor;
+
+    fragment.appendChild(wizardElement);
+  }
+
+  listElement.appendChild(fragment);
+};
+
+// Выполнение программы
+setupBlock.classList.remove('hidden');
 setupBlock.querySelector('.setup-similar').classList.remove('hidden');
+
+makeWizardsArr(wizards, WIZARDS_COUNT);
+makeWizardsElements(wizards);
+
+
