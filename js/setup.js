@@ -138,9 +138,7 @@ var closeSetupWindow = function () {
 // Выполнение программы
 
 // открытие окна настроек по щелчку на икноку
-setupOpen.addEventListener('click', function () {
-  openSetupWindow();
-});
+setupOpen.addEventListener('click', openSetupWindow);
 
 // открытие окна по нажатию Enter на икноку в фокусе
 setupOpen.addEventListener('keydown', function (evt) {
@@ -150,9 +148,7 @@ setupOpen.addEventListener('keydown', function (evt) {
 });
 
 // закрытие окна настроек по щелчку на крестик
-setupClose.addEventListener('click', function () {
-  closeSetupWindow();
-});
+setupClose.addEventListener('click', closeSetupWindow);
 
 // закрытие окна настроек по нажатию клавиши Esc
 setupClose.addEventListener('keydown', function (evt) {
