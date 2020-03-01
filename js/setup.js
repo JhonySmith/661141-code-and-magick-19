@@ -48,19 +48,16 @@ var WIZARDS_COUNT = 4; // Число "похожих" магов
 // Функции
 
 // функция получения случайного элемента массива
-var arrayRandElement = function (arr) {
-  var rand = Math.floor(Math.random() * arr.length);
-  return arr[rand];
-};
+
 
 // функция создания массива магов
 var makeWizardsArr = function (wizardsNumber) {
   var clearArr = [];
   for (var i = 0; i < wizardsNumber; i++) {
     clearArr[i] = {
-      name: arrayRandElement(names) + ' ' + arrayRandElement(secondNames),
-      coatColor: arrayRandElement(coatColors),
-      eyesColor: arrayRandElement(eyesColors)
+      name: window.randomizer(names) + ' ' + window.randomizer(secondNames),
+      coatColor: window.randomizer(coatColors),
+      eyesColor: window.randomizer(eyesColors)
     };
   }
 
