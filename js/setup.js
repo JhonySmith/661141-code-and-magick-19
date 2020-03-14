@@ -1,41 +1,6 @@
 'use strict';
 
-//  Массивы данных
-var names = [
-  'Иван',
-  'Хуан Себастьян',
-  'Мария',
-  'Кристоф',
-  'Виктор',
-  'Юлия',
-  'Люпита',
-  'Вашингтон'
-];
-
-var secondNames = [
-  'да Марья',
-  'Верон',
-  'Мирабелла',
-  'Вальц',
-  'Онопко',
-  'Топольницкая',
-  'Нионго',
-  'Ирвинг'
-];
-
-var coatColors = [
-  'rgb(101, 137, 164)',
-  'rgb(241, 43, 107)',
-  'rgb(146, 100, 161)',
-  'rgb(56, 159, 117)',
-  'rgb(215, 210, 55)',
-  'rgb(0, 0, 0)'
-];
-
-var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
-
 // Необходимые переменные
-
 var setupBlock = document.querySelector('.setup');
 var listElement = setupBlock.querySelector('.setup-similar-list');
 
@@ -45,38 +10,20 @@ var wizardTemplate = document
 
 // Константы
 var WIZARDS_COUNT = 4; // Число "похожих" магов
-// Функции
-
-// функция получения случайного элемента массива
-
-
-// функция создания массива магов
-var makeWizardsArr = function (wizardsNumber) {
-  var clearArr = [];
-  for (var i = 0; i < wizardsNumber; i++) {
-    clearArr[i] = {
-      name: window.randomizer(names) + ' ' + window.randomizer(secondNames),
-      coatColor: window.randomizer(coatColors),
-      eyesColor: window.randomizer(eyesColors)
-    };
-  }
-
-  return clearArr;
-};
 
 // функция отрисовки массива магов на странице
-var makeWizardsElements = function (wizardsArr) {
+var successHandler = function (wizardsArr) {
   var fragment = document.createDocumentFragment();
 
-  for (var i = 0; i < wizardsArr.length; i++) {
+  for (var i = 0; i < WIZARDS_COUNT; i++) {
     var wizardElement = wizardTemplate.cloneNode(true);
 
     wizardElement.querySelector('.setup-similar-label').textContent =
       wizardsArr[i].name;
     wizardElement.querySelector('.wizard-coat').style.fill =
-      wizardsArr[i].coatColor;
+      wizardsArr[i].colorCoat;
     wizardElement.querySelector('.wizard-eyes').style.fill =
-      wizardsArr[i].eyesColor;
+      wizardsArr[i].colorEyes;
 
     fragment.appendChild(wizardElement);
   }
@@ -84,8 +31,16 @@ var makeWizardsElements = function (wizardsArr) {
   listElement.appendChild(fragment);
 };
 
+var errorHandler = function (errorMessage) {
+  var node = document.createElement('div');
+  node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red';
+  node.style.position = 'absolute';
+
+  node.textContent = errorMessage;
+  document.body.insertAdjacentElement('afterbegin', node);
+};
+
+window.backend.load(successHandler, errorHandler);
+
 // Выполнение программы
 setupBlock.querySelector('.setup-similar').classList.remove('hidden');
-
-var wizards = makeWizardsArr(WIZARDS_COUNT);
-makeWizardsElements(wizards);

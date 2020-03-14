@@ -109,4 +109,14 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+
+  // Отправка данных на сервер
+  var form = setupBlock.querySelector('.setup-wizard-form');
+
+  form.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(form), function () {
+      setupBlock.classList.add('hidden');
+    });
+    evt.preventDefault();
+  });
 })();
