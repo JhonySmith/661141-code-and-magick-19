@@ -20,6 +20,7 @@
 
   // функция открытия окна настроек
   var openSetupWindow = function () {
+    window.backend.load(window.setup.successHandler, window.setup.errorHandler);
     setupBlock.classList.remove('hidden');
     document.addEventListener('keydown', onSetupWindowEscPress);
     setupBlock.style.top = '80px';
